@@ -28,7 +28,10 @@ public class MenuInitializer {
   public void init() {
     MenuCreateRequest request = MenuCreateRequest.builder()
             .menus(new Menu[]{
-                    Menu.click("点我试试", "tryclickme")
+                    Menu.click("点我试试", "tryclickme"),
+                    Menu.click("点我弹出", null,
+                            Menu.view("去百度", "http://www.baidu.com"),
+                            Menu.view("去淘宝", "http://www.taobao.com"))
             })
             .build();
     MenuCreateResponse response = executor.execute(request);
