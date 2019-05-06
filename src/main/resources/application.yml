@@ -4,3 +4,6 @@ wechat:
     secret: f3b89efbed6037be8dca5ee1d6082fc4
     token: demo-token
     encoding-aes-key:
+spring:
+  thymeleaf:
+    cache: false

@@ -31,7 +31,8 @@ public class MenuInitializer {
                     Menu.click("点我试试", "tryclickme"),
                     Menu.click("点我弹出", null,
                             Menu.view("去百度", "http://www.baidu.com"),
-                            Menu.view("去淘宝", "http://www.taobao.com"))
+                            Menu.view("去淘宝", "http://www.taobao.com"),
+                            Menu.view("我的", "http://ggs.4kb.cn/oauth2"))
             })
             .build();
     MenuCreateResponse response = executor.execute(request);
