@@ -1,4 +1,4 @@
-package me.gaigeshen.wechat.demo.spring;
+package me.gaigeshen.wechat.mp.demo.spring;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

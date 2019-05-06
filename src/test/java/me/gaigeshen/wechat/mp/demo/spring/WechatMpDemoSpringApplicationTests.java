@@ -1,4 +1,4 @@
-package me.gaigeshen.wechat.demo.spring;
+package me.gaigeshen.wechat.mp.demo.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

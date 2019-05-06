@@ -1,6 +1,8 @@
-package me.gaigeshen.wechat.demo.spring.message.processor;
+package me.gaigeshen.wechat.mp.demo.spring.message.processor;
 
+import lombok.extern.slf4j.Slf4j;
 import me.gaigeshen.wechat.mp.message.*;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -9,16 +11,22 @@ import java.io.IOException;
  *
  * @author gaigeshen
  */
+@Slf4j
+@Component
 public class TextMessageFirstProcessor extends TypedMessageProcessor<TextMessage> {
   @Override
   protected void doProcessTyped(TextMessage message, ReplyMessageResponse response, MessageProcessorChain processorChain) throws IOException {
-    response.write(
-            // 原封不动回复内容
-            new TextReplyMessage(message.getFromUserName(), message.getToUserName(), message.getContent()));
+
+    // 假定做了一些逻辑处理
+    log.info("do somthing by TextMessageFirstProcessor");
+
+
+    // 然后交给下个处理器去处理吧
+    processorChain.doProcess(message, response);
   }
 
   @Override
   public int order() {
-    return 0;
+    return 1;
   }
 }

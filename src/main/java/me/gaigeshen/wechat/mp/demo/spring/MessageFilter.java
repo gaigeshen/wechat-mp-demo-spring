@@ -1,4 +1,4 @@
-package me.gaigeshen.wechat.demo.spring;
+package me.gaigeshen.wechat.mp.demo.spring;
 
 import me.gaigeshen.wechat.mp.Config;
 import me.gaigeshen.wechat.mp.message.MessageProcessorChain;
@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 微信的消息会被此过滤器处理，请将此链接配置到微信管理后台
+ *
  * @author gaigeshen
  */
-@WebFilter("/message-handler")
+@WebFilter("/messages")
 public class MessageFilter implements Filter {
 
   @Autowired

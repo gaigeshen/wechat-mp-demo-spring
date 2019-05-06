@@ -1,4 +1,4 @@
-package me.gaigeshen.wechat.demo.spring;
+package me.gaigeshen.wechat.mp.demo.spring;
 
 import me.gaigeshen.wechat.mp.Config;
 import me.gaigeshen.wechat.mp.RequestExecutor;
@@ -28,21 +28,23 @@ public class WechatConfiguration {
     this.properties = properties;
   }
 
+  // 用于消息处理
+  @Bean
+  public MessageProcessorChain messageProcessorChain(ApplicationContext ctx) {
+    // 获取所有的消息处理器
+    // 包含所有的事件消息处理器
+    Map<String, MessageProcessor> processors = ctx.getBeansOfType(MessageProcessor.class);
+    return new DefaultMessageProcessorChain(new ArrayList<>(processors.values()));
+  }
+
   // 网页开发相关
   @Bean
   public JsApiSignatureCalculator jsApiSignatureCalculator(RequestExecutor executor) {
     return new JsApiSignatureCalculator(executor);
   }
 
-  // 用于消息处理
-  @Bean
-  public MessageProcessorChain messageProcessorChain(ApplicationContext ctx) {
-    Map<String, MessageProcessor> processors = ctx.getBeansOfType(MessageProcessor.class);
-    return new DefaultMessageProcessorChain(new ArrayList<>(processors.values()));
-  }
-
   // 用于普通接口调用
-  @Bean
+  @Bean(destroyMethod = "close")
   public RequestExecutor requestExecutor(Config config) {
     return new RequestExecutor(
             new HttpClientExecutor(2000, 2000, 3000),
