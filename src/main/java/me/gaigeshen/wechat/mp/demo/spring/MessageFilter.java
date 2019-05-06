@@ -34,6 +34,7 @@ public class MessageFilter implements Filter {
       chain.doFilter(req, resp);
     } else {
       // 可能需要验证消息来源
+      // 首次接入的时候会被调用
       if (StringUtils.isNotBlank(req.getParameter("echostr"))) {
         ServletMessageSourceValidator.create(config, (HttpServletRequest) req, (HttpServletResponse) resp).doValidateAndRespond();
         return;
