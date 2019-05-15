@@ -1,8 +1,8 @@
 wechat:
   mp:
-    appid: wx2d9b466acf5879dd
-    secret: f3b89efbed6037be8dca5ee1d6082fc4
-    token: demo-token
+    appid:
+    secret:
+    token:
     encoding-aes-key:
 spring:
   thymeleaf:

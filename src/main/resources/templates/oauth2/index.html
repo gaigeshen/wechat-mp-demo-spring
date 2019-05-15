@@ -3,16 +3,69 @@
 <head>
     <title>hello</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        wx.config({
+            debug: true,
+            appId: /*[[${appid}]]*/'appid',
+            timestamp: /*[[${timestamp}]]*/ 0,
+            nonceStr: /*[[${nonceStr}]]*/'nonceStr',
+            signature: /*[[${signature}]]*/'signature',
+            jsApiList: [
+                'hideOptionMenu',
+                'showOptionMenu',
+                'updateAppMessageShareData',
+                'updateTimelineShareData']
+        });
+        wx.error(function(res){
+            console.log(res);
+        });
+        wx.ready(function(){
+            wx.hideOptionMenu(); // 在分享配置成功之前，禁用按钮
+            wx.checkJsApi({ // 检查接口是否可调用
+               jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"],
+               success: function (result) {
+                   if (result.errMsg === "checkJsApi:ok") {
+                       var apiResult = result.checkResult;
+                       if (apiResult["updateAppMessageShareData"]) {
+                           wx.updateAppMessageShareData({ // 分享给朋友，注意安全域名的配置
+                               title: '这是分享标题',
+                               desc: '这是分享描述',
+                               link: 'xxx',
+                               imgUrl: 'xxx',
+                               success: function (result) {
+                                   alert(result.errMsg);
+                               }
+                           });
+                       }
+                       if (apiResult["updateTimelineShareData"]) {
+                           wx.updateTimelineShareData({ // 分享到朋友圈，注意安全域名的配置
+                               title: '这是分享标题',
+                               link: 'xxx',
+                               imgUrl: 'xxx',
+                               success: function (result) {
+                                   alert(result.errMsg);
+                               }
+                           });
+                       }
+                   }
+                   wx.showOptionMenu(); // 分享配置完毕之后再启用按钮
+               }
+            });
+        });
+        /*]]>*/
+    </script>
 </head>
 <body>
-<p th:text="'openid！, ' + ${openid} + '!'">3333</p>
-<p th:text="'nickname！, ' + ${nickname} + '!'">3333</p>
-<p th:text="'sex！, ' + ${sex} + '!'">3333</p>
-<p th:text="'province！, ' + ${province} + '!'">3333</p>
-<p th:text="'city！, ' + ${city} + '!'">3333</p>
-<p th:text="'country！, ' + ${country} + '!'">3333</p>
-<p th:text="'avatar！, ' + ${avatar} + '!'">3333</p>
-<p th:text="'privilege！, ' + ${privilege} + '!'">3333</p>
-<p th:text="'unionId！, ' + ${unionId} + '!'">3333</p>
+<p th:text="'openid, ' + ${user.openid} + '!'">3333</p>
+<p th:text="'nickname, ' + ${user.nickname} + '!'">3333</p>
+<p th:text="'sex, ' + ${user.sex} + '!'">3333</p>
+<p th:text="'province, ' + ${user.province} + '!'">3333</p>
+<p th:text="'city, ' + ${user.city} + '!'">3333</p>
+<p th:text="'country, ' + ${user.country} + '!'">3333</p>
+<p th:text="'avatar, ' + ${user.avatar} + '!'">3333</p>
+<p th:text="'privilege, ' + ${user.privilege} + '!'">3333</p>
+<p th:text="'unionId, ' + ${user.unionId} + '!'">3333</p>
 </body>
 </html>

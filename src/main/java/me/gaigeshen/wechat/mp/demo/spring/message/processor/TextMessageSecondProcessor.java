@@ -25,6 +25,9 @@ public class TextMessageSecondProcessor extends TypedMessageProcessor<TextMessag
     response.write(
             // 原封不动回复内容
             new TextReplyMessage(message.getFromUserName(), message.getToUserName(), "我是服务器：" + message.getContent()));
+
+    // 转发到客服系统
+    // response.write(new TransferKefuReplyMessage(message.getFromUserName(), message.getToUserName(), new TransferKefuReplyMessage.TransInfo("ggskefu")));
   }
 
   @Override
